@@ -1,1 +1,205 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mariam Fattah Latif</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 1.5rem;
+      max-width: 640px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 3px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1rem;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.85);
+      margin-top: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .body { padding: 2rem; }
+
+    .bio {
+      color: #94a3b8;
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6366f1;
+      margin-bottom: 0.75rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tag {
+      background: #0f172a;
+      color: #a5b4fc;
+      border: 1px solid #334155;
+      border-radius: 999px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.82rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-item {
+      background: #0f172a;
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+
+    .info-item .label {
+      font-size: 0.72rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-item .value {
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    .links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .link-btn {
+      flex: 1;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .link-btn:hover { opacity: 0.8; }
+
+    .btn-github { background: #6366f1; color: #fff; }
+    .btn-linkedin { background: #0ea5e9; color: #fff; }
+    .btn-email { background: #334155; color: #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hero">
+      <div class="avatar">👩‍💻</div>
+      <h1>Mariam Fattah Latif</h1>
+      <p>Software Engineer · Cairo, Egypt</p>
+    </div>
+    <div class="body">
+      <p class="bio">
+        Passionate software engineer with 4+ years of experience building scalable web applications.
+        I love crafting clean, user-friendly products and exploring new technologies.
+        Currently focused on full-stack development and AI-powered tools.
+      </p>
+
+      <p class="section-title">Skills</p>
+      <div class="tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Python</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span>
+        <span class="tag">AWS</span>
+      </div>
+
+      <p class="section-title">Details</p>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Experience</div>
+          <div class="value">4+ Years</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Education</div>
+          <div class="value">B.Sc. Computer Science</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Availability</div>
+          <div class="value">Open to Work</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Languages</div>
+          <div class="value">Arabic, English</div>
+        </div>
+      </div>
+
+      <p class="section-title">Connect</p>
+      <div class="links">
+        <a class="link-btn btn-github" href="#">⚡ GitHub</a>
+        <a class="link-btn btn-linkedin" href="#">in LinkedIn</a>
+        <a class="link-btn btn-email" href="#">✉ Email</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
