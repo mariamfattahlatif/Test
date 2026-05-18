@@ -5,124 +5,258 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mariam Abdel Fattah — Product Manager</title>
   <style>
+    :root {
+      --bg:        #080d1a;
+      --bg2:       #0d1526;
+      --surface:   rgba(255,255,255,0.05);
+      --border:    rgba(255,255,255,0.08);
+      --accent1:   #6366f1;
+      --accent2:   #8b5cf6;
+      --accent3:   #ec4899;
+      --cyan:      #22d3ee;
+      --text:      #f1f5f9;
+      --muted:     #94a3b8;
+      --dim:       #475569;
+      --radius:    1rem;
+      --radius-sm: 0.6rem;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      min-height: 100vh;
     }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Glow blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent1); top: -200px; left: -200px; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent3); bottom: -150px; right: -150px; }
+    .blob-3 { width: 400px; height: 400px; background: var(--cyan);    top: 50%;     left: 60%; transform: translate(-50%,-50%); }
 
     /* ── Hero ── */
     .hero {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed, #be185d);
-      padding: 3.5rem 1.5rem 2.5rem;
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem 3rem;
       text-align: center;
+      background: linear-gradient(180deg, rgba(99,102,241,0.12) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar-ring {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent3), var(--cyan));
+      display: inline-flex;
+      box-shadow: 0 0 40px rgba(99,102,241,0.4);
     }
 
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 3px solid rgba(255,255,255,0.35);
+      background: #1a1f35;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e2440, #151b32);
       letter-spacing: 1px;
-      margin: 0 auto 1.25rem;
+    }
+
+    .avatar span {
+      background: linear-gradient(135deg, var(--accent1), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2.5px solid var(--bg);
+      box-shadow: 0 0 8px rgba(34,197,94,0.6);
     }
 
     .hero h1 {
-      font-size: 2rem;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
       font-weight: 800;
-      color: #fff;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
     }
 
-    .hero .title {
-      color: rgba(255,255,255,0.85);
-      font-size: 1.05rem;
-      margin-top: 0.3rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: #a5b4fc;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
       font-weight: 500;
+      margin-bottom: 0.75rem;
     }
 
-    .hero .location {
-      color: rgba(255,255,255,0.7);
+    .hero-location {
+      color: var(--muted);
       font-size: 0.9rem;
-      margin-top: 0.4rem;
+      margin-bottom: 1.75rem;
     }
 
-    .contact-links {
+    .contact-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-top: 1.5rem;
     }
 
-    .contact-links a {
+    .contact-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
+      gap: 0.45rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      color: var(--text);
       text-decoration: none;
-      padding: 0.45rem 1rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 999px;
-      font-size: 0.85rem;
-      transition: background 0.2s;
+      font-size: 0.84rem;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
-    .contact-links a:hover { background: rgba(255,255,255,0.22); }
+    .contact-btn:hover {
+      background: rgba(99,102,241,0.18);
+      border-color: rgba(99,102,241,0.45);
+      transform: translateY(-1px);
+    }
 
     /* ── Layout ── */
     .container {
-      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
+      padding: 3rem 1.25rem 5rem;
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
+      gap: 3rem;
     }
 
-    /* ── Section ── */
+    /* ── Section heading ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-emoji {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
     .section-label {
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #818cf8;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #1e293b;
+      color: var(--accent1);
+      flex: 1;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
     }
 
     /* ── Summary ── */
-    .summary p {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      line-height: 1.75;
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .summary-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.8;
     }
 
     /* ── Experience ── */
-    .experience-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
+    .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
 
     .exp-card {
-      background: #1e293b;
-      border-radius: 1rem;
-      padding: 1.25rem 1.5rem;
-      border-left: 3px solid #6366f1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .exp-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent1), var(--accent3));
+      border-radius: 3px 0 0 3px;
+    }
+
+    .exp-card:hover {
+      border-color: rgba(99,102,241,0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
     .exp-header {
@@ -130,195 +264,274 @@
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 0.25rem;
-      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .exp-company {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #e2e8f0;
+      color: var(--text);
     }
 
     .exp-role {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: #a5b4fc;
-      margin-top: 0.15rem;
+      margin-top: 0.2rem;
     }
 
-    .exp-meta {
-      text-align: right;
-      font-size: 0.8rem;
-      color: #64748b;
-    }
+    .exp-meta { text-align: right; }
 
     .exp-badge {
       display: inline-block;
-      background: #4f46e5;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
       color: #fff;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.15rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.18rem 0.65rem;
       border-radius: 999px;
+      letter-spacing: 0.04em;
       margin-bottom: 0.3rem;
+    }
+
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--dim);
     }
 
     .exp-card ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .exp-card ul li {
       font-size: 0.875rem;
-      color: #94a3b8;
-      padding-left: 1rem;
+      color: var(--muted);
+      padding-left: 1.25rem;
       position: relative;
+      line-height: 1.6;
     }
 
     .exp-card ul li::before {
-      content: "›";
+      content: "▸";
       position: absolute;
       left: 0;
-      color: #6366f1;
-      font-weight: 700;
+      color: var(--accent1);
+      font-size: 0.75rem;
+      top: 0.15rem;
     }
 
     /* ── Skills ── */
-    .tags {
+    .skills-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
     }
 
-    .tag {
-      background: #1e293b;
-      color: #a5b4fc;
-      border: 1px solid #334155;
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #c4b5fd;
+      padding: 0.4rem 1rem;
       border-radius: 999px;
-      padding: 0.35rem 1rem;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
+      font-weight: 500;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      background: rgba(99,102,241,0.2);
+      border-color: rgba(99,102,241,0.5);
+      transform: translateY(-2px);
     }
 
     /* ── Education ── */
-    .edu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .edu-list { display: flex; flex-direction: column; gap: 0.85rem; }
 
     .edu-card {
-      background: #1e293b;
-      border-radius: 0.85rem;
-      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       flex-wrap: wrap;
       gap: 0.5rem;
+      backdrop-filter: blur(6px);
+      transition: border-color 0.2s, transform 0.2s;
     }
+
+    .edu-card:hover {
+      border-color: rgba(99,102,241,0.3);
+      transform: translateX(4px);
+    }
+
+    .edu-icon { font-size: 1.4rem; margin-right: 0.75rem; flex-shrink: 0; }
+
+    .edu-info { display: flex; align-items: center; }
 
     .edu-degree {
       font-size: 0.92rem;
       font-weight: 600;
-      color: #e2e8f0;
+      color: var(--text);
     }
 
     .edu-school {
-      font-size: 0.82rem;
-      color: #64748b;
+      font-size: 0.8rem;
+      color: var(--dim);
       margin-top: 0.15rem;
     }
 
     .edu-year {
-      font-size: 0.8rem;
-      color: #475569;
+      background: rgba(34,211,238,0.1);
+      border: 1px solid rgba(34,211,238,0.2);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
       white-space: nowrap;
     }
 
     /* ── Certifications ── */
-    .cert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
+    .cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
 
-    .cert-item {
+    .cert-card {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      background: #1e293b;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1.1rem;
-      font-size: 0.88rem;
-      color: #cbd5e1;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1.2rem;
+      backdrop-filter: blur(6px);
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
     }
 
-    .cert-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #6366f1;
-      flex-shrink: 0;
+    .cert-card:hover {
+      background: rgba(99,102,241,0.08);
+      border-color: rgba(99,102,241,0.3);
+      transform: translateX(4px);
+    }
+
+    .cert-emoji { font-size: 1.2rem; flex-shrink: 0; }
+
+    .cert-name {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+      flex: 1;
     }
 
     .cert-issuer {
-      margin-left: auto;
-      font-size: 0.78rem;
-      color: #475569;
+      font-size: 0.76rem;
+      color: var(--dim);
       white-space: nowrap;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero         { animation: fadeUp 0.6s ease both; }
+    .summary-card { animation: fadeUp 0.6s ease 0.1s both; }
+    .exp-card     { animation: fadeUp 0.5s ease both; }
+    .exp-card:nth-child(2) { animation-delay: 0.1s; }
+    .skill-tag    { animation: fadeUp 0.4s ease both; }
+    .edu-card     { animation: fadeUp 0.4s ease both; }
+    .cert-card    { animation: fadeUp 0.4s ease both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
     }
 
     @media (max-width: 520px) {
-      .hero h1 { font-size: 1.6rem; }
-      .exp-meta { text-align: left; }
-      .cert-issuer { display: none; }
+      .hero h1      { font-size: 1.6rem; }
+      .exp-meta     { text-align: left; }
+      .cert-issuer  { display: none; }
+      .edu-icon     { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- ── Hero ── -->
   <div class="hero">
-    <div class="avatar">MA</div>
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar"><span>MA</span></div>
+      </div>
+      <div class="status-dot" title="Open to work"></div>
+    </div>
+
     <h1>Mariam Abdel Fattah</h1>
-    <div class="title">Product Manager</div>
-    <div class="location">📍 New Cairo, Egypt</div>
-    <div class="contact-links">
-      <a href="mailto:mariam.fattah.latif@gmail.com">✉ mariam.fattah.latif@gmail.com</a>
-      <a href="tel:+201098712232">📞 +20 109 871 2232</a>
+
+    <div class="hero-badge">🚀 Product Manager</div>
+
+    <div class="hero-location">📍 New Cairo, Egypt</div>
+
+    <div class="contact-row">
+      <a class="contact-btn" href="mailto:mariam.fattah.latif@gmail.com">✉️ mariam.fattah.latif@gmail.com</a>
+      <a class="contact-btn" href="tel:+201098712232">📞 +20 109 871 2232</a>
     </div>
   </div>
 
   <div class="container">
 
-    <!-- Summary -->
-    <div class="summary">
-      <div class="section-label">Professional Summary</div>
-      <p>
-        Product Owner with 7+ years of progressive experience across product management, service delivery,
-        and Agile project execution in global environments. Skilled at translating business requirements into
-        deliverable features, managing multi-disciplinary teams, and aligning digital solutions with business growth.
-        Strong communicator with proven results in backlog optimization, UAT delivery, and stakeholder satisfaction.
-      </p>
+    <!-- ── Summary ── -->
+    <div>
+      <div class="section-head">
+        <span class="section-emoji">✨</span>
+        <span class="section-label">Professional Summary</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="summary-card">
+        <p>
+          Product Owner with <strong style="color:#c4b5fd">7+ years</strong> of progressive experience across product management,
+          service delivery, and Agile project execution in global environments. Skilled at translating business
+          requirements into deliverable features, managing multi-disciplinary teams, and aligning digital
+          solutions with business growth. Strong communicator with proven results in backlog optimization,
+          UAT delivery, and stakeholder satisfaction.
+        </p>
+      </div>
     </div>
 
-    <!-- Experience -->
+    <!-- ── Experience ── -->
     <div>
-      <div class="section-label">Work History</div>
-      <div class="experience-list">
+      <div class="section-head">
+        <span class="section-emoji">💼</span>
+        <span class="section-label">Work History</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-list">
 
         <div class="exp-card">
           <div class="exp-header">
             <div>
-              <div class="exp-company">Valeo Service</div>
+              <div class="exp-company">🏢 Valeo Service</div>
               <div class="exp-role">Product Manager</div>
             </div>
             <div class="exp-meta">
-              <div class="exp-badge">Current</div>
-              <div>06/2025 – Present</div>
-              <div>Egypt</div>
+              <div class="exp-badge">🟢 Current</div>
+              <div class="exp-date">Jun 2025 – Present · Egypt</div>
             </div>
           </div>
           <ul>
@@ -327,107 +540,127 @@
             <li>Collaborate with business units across Europe to define roadmap priorities and milestones.</li>
             <li>Conduct user research and translate insights into actionable backlog items.</li>
             <li>Facilitate all Scrum ceremonies: sprint planning, daily stand-ups, reviews, and retrospectives.</li>
-            <li>Facilitate cross-department collaboration to align product goals with marketing, legal, and sales initiatives.</li>
+            <li>Facilitate cross-department collaboration to align product goals with marketing, legal, and sales.</li>
           </ul>
         </div>
 
         <div class="exp-card">
           <div class="exp-header">
             <div>
-              <div class="exp-company">Cyshield</div>
+              <div class="exp-company">🛡️ Cyshield</div>
               <div class="exp-role">Product Manager · Acting PO / Scrum Master</div>
             </div>
             <div class="exp-meta">
-              <div>07/2023 – 06/2025</div>
-              <div>Egypt</div>
+              <div class="exp-date">Jul 2023 – Jun 2025 · Egypt</div>
             </div>
           </div>
           <ul>
             <li>Drove end-to-end delivery of SaaS-based digital solutions from discovery to launch.</li>
             <li>Created and prioritized product roadmaps using data insights and customer feedback.</li>
             <li>Acted as Scrum Master leading Agile ceremonies and transformation efforts.</li>
-            <li>Introduced KPI tracking and stakeholder reporting, enhancing visibility into project progress and product performance.</li>
+            <li>Introduced KPI tracking and stakeholder reporting, enhancing project visibility and product performance.</li>
           </ul>
         </div>
 
       </div>
     </div>
 
-    <!-- Skills -->
+    <!-- ── Skills ── -->
     <div>
-      <div class="section-label">Skills</div>
-      <div class="tags">
-        <span class="tag">Agile Methodology</span>
-        <span class="tag">Product Planning</span>
-        <span class="tag">Story Planning</span>
-        <span class="tag">User Story Creation</span>
-        <span class="tag">Customer Relationship Management</span>
-        <span class="tag">Escalation Management</span>
-        <span class="tag">Backlog Optimization</span>
-        <span class="tag">Scrum</span>
-        <span class="tag">Jira</span>
-        <span class="tag">UAT</span>
-        <span class="tag">Stakeholder Management</span>
-        <span class="tag">Roadmapping</span>
-        <span class="tag">UI/UX</span>
+      <div class="section-head">
+        <span class="section-emoji">⚡</span>
+        <span class="section-label">Skills</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <span class="skill-tag">🔄 Agile Methodology</span>
+        <span class="skill-tag">🗺️ Product Planning</span>
+        <span class="skill-tag">📖 Story Planning</span>
+        <span class="skill-tag">✍️ User Story Creation</span>
+        <span class="skill-tag">🤝 CRM</span>
+        <span class="skill-tag">📢 Escalation Management</span>
+        <span class="skill-tag">📋 Backlog Optimization</span>
+        <span class="skill-tag">🏃 Scrum</span>
+        <span class="skill-tag">🎯 Jira</span>
+        <span class="skill-tag">✅ UAT</span>
+        <span class="skill-tag">👥 Stakeholder Management</span>
+        <span class="skill-tag">🛣️ Roadmapping</span>
+        <span class="skill-tag">🎨 UI/UX</span>
       </div>
     </div>
 
-    <!-- Education -->
+    <!-- ── Education ── -->
     <div>
-      <div class="section-label">Education</div>
+      <div class="section-head">
+        <span class="section-emoji">🎓</span>
+        <span class="section-label">Education</span>
+        <div class="section-line"></div>
+      </div>
       <div class="edu-list">
         <div class="edu-card">
-          <div>
-            <div class="edu-degree">MBA — International Business</div>
-            <div class="edu-school">Arab Academy for Science & Technology (AAST), Cairo</div>
+          <div class="edu-info">
+            <span class="edu-icon">🏛️</span>
+            <div>
+              <div class="edu-degree">MBA — International Business</div>
+              <div class="edu-school">Arab Academy for Science & Technology (AAST), Cairo</div>
+            </div>
           </div>
-          <div class="edu-year">11/2023</div>
+          <div class="edu-year">2023</div>
         </div>
         <div class="edu-card">
-          <div>
-            <div class="edu-degree">B.Sc. — Computer Engineering</div>
-            <div class="edu-school">Arab Academy for Science & Technology (AAST), Egypt</div>
+          <div class="edu-info">
+            <span class="edu-icon">💻</span>
+            <div>
+              <div class="edu-degree">B.Sc. — Computer Engineering</div>
+              <div class="edu-school">Arab Academy for Science & Technology (AAST), Egypt</div>
+            </div>
           </div>
-          <div class="edu-year">05/2018</div>
+          <div class="edu-year">2018</div>
         </div>
         <div class="edu-card">
-          <div>
-            <div class="edu-degree">IGCSE</div>
-            <div class="edu-school">EBIS, Egypt</div>
+          <div class="edu-info">
+            <span class="edu-icon">📚</span>
+            <div>
+              <div class="edu-degree">IGCSE</div>
+              <div class="edu-school">EBIS, Egypt</div>
+            </div>
           </div>
-          <div class="edu-year">06/2013</div>
+          <div class="edu-year">2013</div>
         </div>
       </div>
     </div>
 
-    <!-- Certifications -->
+    <!-- ── Certifications ── -->
     <div>
-      <div class="section-label">Certifications</div>
+      <div class="section-head">
+        <span class="section-emoji">🏆</span>
+        <span class="section-label">Certifications</span>
+        <div class="section-line"></div>
+      </div>
       <div class="cert-list">
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          Professional Scrum Product Owner (PSPO)
+        <div class="cert-card">
+          <span class="cert-emoji">🥇</span>
+          <span class="cert-name">Professional Scrum Product Owner (PSPO)</span>
           <span class="cert-issuer">Scrum.org</span>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          ITIL Practitioner in ITSM
+        <div class="cert-card">
+          <span class="cert-emoji">⚙️</span>
+          <span class="cert-name">ITIL Practitioner in ITSM</span>
           <span class="cert-issuer">AXELOS</span>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          ITIL Foundation in ITSM
+        <div class="cert-card">
+          <span class="cert-emoji">📘</span>
+          <span class="cert-name">ITIL Foundation in ITSM</span>
           <span class="cert-issuer">AXELOS</span>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          Agile Scrum Foundation
+        <div class="cert-card">
+          <span class="cert-emoji">🔁</span>
+          <span class="cert-name">Agile Scrum Foundation</span>
           <span class="cert-issuer">EXIN</span>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          JNCIA Junos
+        <div class="cert-card">
+          <span class="cert-emoji">🌐</span>
+          <span class="cert-name">JNCIA Junos</span>
           <span class="cert-issuer">Juniper</span>
         </div>
       </div>
